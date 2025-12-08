@@ -87,3 +87,19 @@ This system automatically detects chess moves of an over the board chess game. I
 * **Player Thinking** - Whether playing against AI or another player, here the system waits for the player to make a move.
 * **Error** - If the board is currenty in an illegal state then the system will wait for it to be fixed before going on.
 * **Paused** - Game is paused and the state is saved to be played at a different time.
+
+### Events:
+
+#### Camera/OpenCV Events:
+
+* move_detected - Anytype of move is detected.
+* board_moved - Board moved and messed the calibration of the camera.
+* illeagal_moved - A move was played that is not allowed/possible.
+
+#### User Initiated Events:
+
+* start_game_mode - User selects the type of game mode to play and starts it.
+* undo_move - User has the ability to undo the last move, incase the system read the move incorrectly.
+* review_game - User selects a game to review and sends a request to the PI to retrieve that said game.
+* end_game - If the user wants to end the game early and has no future plans then this option will be good.
+* 

@@ -117,33 +117,38 @@ This system automatically detects chess moves of an over the board chess game. I
 
 ## Multithreading
 
+### Types:
+
+**Main/Coordinator Thread**
+* Coordinates all the other threads by managing the information that comes in.
+* It will handle any errors, updates, or resets.
+* It will also relay updates to the phone.
+* It executes all Game State Manager operations.
+* This is the only thread that will modify the game state.
+
 **Camera Thread** 
 * Constantly check every few seconds to see if there is any large changes on the board.
-* If the user confirms they just played a move, then the camera will start to record the game at 10 frames/s for about 6 sec.
+* The camera records at a slow frame rate and the main thread will decide when further analysis is needed.
 * Can still run even if the system is proccessing a different move or waiting for an AI move.
 
 **Cmaera Vision Proccessing Thread**
 * Proccesses the video frames as they come in.
 * These frames will be proccessed in a queue.
-* Calls events accordingly.
+* Pushes the events that proccesed into the Event Bus queue.
 * Runs without having to freeze the UI, or engine.
 
 **Event Bus Thread**
 * This will control what certain events will do.
 * It will queue events as they come in.
-* Dispatches events to the Game State Manager.
+* Dispatches events to the main thread where the Game State manager is run.
 * This keeps the events in the correct order.
-
-**Game State Manger Thread**
-* Keeps track of all board states so far.
-* Makes the correct updates as the game goes on.
-* Isolated to keep from different things interacting.
 
 **Chess Engine Thread**
 * Fetches a move or evaluates a move based on the current board state.
+* Communicates with Main Thread via a response queue.
 * Must run independently to not hinder other proccesses like CV or State Manager.
 
 **Phone Connection Thread**
 * Handles any updates from the phone.
-* Reads all commands that the phone sends.
+* Sends commands to Main Thread via command queue.
 * Sends UI updates to the phone.

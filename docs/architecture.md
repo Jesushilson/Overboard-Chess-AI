@@ -2,7 +2,7 @@
 
 ## Overview
 
-This system automatically detects chess moves of an over the board chess game. It will be able to connect to any phone that has the application to serve a seemless connection. The app will provide AI interaction as well as game review. It will store full length games and provide the ability to export games via PNG. The system relies on real-time computer vision to track moves and must operate reliably under typical room lighting conditions.
+This system automatically detects moves in an over-the-board (physical) chess game using a camera mounted above the board. It will be able to connect to any phone that has the application to serve a seemless connection. The app will provide AI interaction as well as game review. It will store full length games and provide the ability to export games via PNG. The system relies on real-time computer vision to track moves and must operate reliably under typical room lighting conditions.
 
 ## Major Features 
 
@@ -166,7 +166,7 @@ This system automatically detects chess moves of an over the board chess game. I
 - The Threads have Unidirectional Communication which allows for smooth flow of information. It also ensures that no thread depends on receiving a message back from another thread before it continues.
 - Queues act as a buffer make sure there is no issues with relaying information.
   
-#### Livelock - Livelock happens when 2 threads are not stalled but are constantly reacting to eachother causeing a loop of interation and making no progress.
+#### Livelock - Livelock happens when 2 threads are not stalled but are constantly reacting to eachother causeing a loop of interactions and making no progress.
 
 **How This Design Avoids Livelock:**
 - No 2 threads react directly to each other.
